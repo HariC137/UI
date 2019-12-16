@@ -51,7 +51,7 @@ class Ui_Dialog(object):
     def boot(self):
         self.completed = 0
         while self.completed <100:
-            self.completed += 0.0001
+            self.completed += 0.0000001
             self.progressBar.setValue(self.completed)
         self.S.setGeometry(QtCore.QRect(560, 590, 121, 41))
         self.S.setObjectName("S")
