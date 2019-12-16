@@ -105,25 +105,24 @@ class Ui_MainWindow(object):
         self.label_5.setText(_translate("MainWindow", "KM/H"))
         self.label_6.setText(_translate("MainWindow", "%"))
 
+        def clicked(self):
+            if self.killswitch.isChecked():
+                print('Checked')
+                msg_1 = QMessageBox()
+                msg_1.setIcon(QMessageBox.Information)
+                msg_1.setWindowIcon(QtGui.QIcon("electric-car.png"))
+                msg_1.setWindowTitle("ALERT!!")
+                msg_1.setText("The engine has started")
 
-      def clicked(self):
-        if self.killswitch.isChecked():
-            print('Checked')
-            msg_1 = QMessageBox()
-            msg_1.setIcon(QMessageBox.Information)
-            msg_1.setWindowIcon(QtGui.QIcon("electric-car.png"))
-            msg_1.setWindowTitle("ALERT!!")
-            msg_1.setText("The engine has started")
+                x = msg_1.exec_()
+            else:
+                msg_2 = QMessageBox()
+                msg_2.setIcon(QMessageBox.Warning)
+                msg_2.setWindowIcon(QtGui.QIcon("electric-car.png"))
+                msg_2.setWindowTitle("ALERT!!")
+                msg_2.setText("The killswitch might be off!")
 
-            x = msg_1.exec_()
-        else:
-            msg_2 = QMessageBox()
-            msg_2.setIcon(QMessageBox.Warning)
-            msg_2.setWindowIcon(QtGui.QIcon("electric-car.png"))
-            msg_2.setWindowTitle("ALERT!!")
-            msg_2.setText("The killswitch might be off!")
-
-            x = msg_2.exec_()
+                x = msg_2.exec_()
 
 
 if __name__ == "__main__":
