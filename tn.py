@@ -8,7 +8,7 @@
 
 
 from PyQt5 import QtCore, QtGui, QtWidgets
-
+import RPi.GPIO as GPIO
 
 class Ui_Dialog(object):
     def setupUi(self, Dialog):
@@ -58,11 +58,32 @@ class Ui_Dialog(object):
 
 
     def click(self):
-        Dialog.close()
+        #Dialog.close()
+        try:
+#turn on and off the led in intervals of 1 second
+            while(True):
+            #turn on, set as HIGH or 1
+            GPIO.output(led,GPIO.HIGH)
+            print(“ON”)
+            time.sleep(1)
+            #turn off, set as LOW or 0
+            GPIO.output(led, GPIO.LOW)
+            print(“OFF”)
+            time.sleep(1)
+        except KeyboardInterrupt:
+            #cleanup GPIO settings before exiting
+            GPIO.cleanup()
+            print(“Exiting...”)
 
 
 if __name__ == "__main__":
     import sys
+
+    GPIO.setmode(GPIO.BOARD)
+    mypin = 8
+    GPIO.setup(mypin, GPIO.OUT, initial = 0)
+
+
     app = QtWidgets.QApplication(sys.argv)
     Dialog = QtWidgets.QDialog()
     ui = Ui_Dialog()

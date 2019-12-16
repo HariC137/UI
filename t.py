@@ -8,7 +8,7 @@
 
 
 from PyQt5 import QtCore, QtGui, QtWidgets
-
+import RPi.GPIO as GPIO
 
 class Ui_MainWindow(object):
     def setupUi(self, MainWindow):
