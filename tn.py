@@ -63,17 +63,17 @@ class Ui_Dialog(object):
 #turn on and off the led in intervals of 1 second
             while(True):
             #turn on, set as HIGH or 1
-            GPIO.output(led,GPIO.HIGH)
-            print(“ON”)
-            time.sleep(1)
-            #turn off, set as LOW or 0
-            GPIO.output(led, GPIO.LOW)
-            print(“OFF”)
-            time.sleep(1)
+                GPIO.output(led,GPIO.HIGH)
+                print("ON")
+                time.sleep(1)
+                #turn off, set as LOW or 0
+                GPIO.output(led, GPIO.LOW)
+                print("OFF")
+                time.sleep(1)
         except KeyboardInterrupt:
             #cleanup GPIO settings before exiting
             GPIO.cleanup()
-            print(“Exiting...”)
+            print("Exiting...")
 
 
 if __name__ == "__main__":
