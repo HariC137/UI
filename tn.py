@@ -9,6 +9,7 @@
 
 from PyQt5 import QtCore, QtGui, QtWidgets
 import RPi.GPIO as GPIO
+import time
 
 class Ui_Dialog(object):
     def setupUi(self, Dialog):
@@ -63,11 +64,11 @@ class Ui_Dialog(object):
 #turn on and off the led in intervals of 1 second
             while(True):
             #turn on, set as HIGH or 1
-                GPIO.output(led,GPIO.HIGH)
+                GPIO.output(8,GPIO.HIGH)
                 print("ON")
                 time.sleep(1)
                 #turn off, set as LOW or 0
-                GPIO.output(led, GPIO.LOW)
+                GPIO.output(8, GPIO.LOW)
                 print("OFF")
                 time.sleep(1)
         except KeyboardInterrupt:
