@@ -17,7 +17,7 @@ class Ui_Dialog(object):
         Dialog.setObjectName("Dialog")
         Dialog.resize(800, 500)
         Dialog.setWindowIcon(QtGui.QIcon("electric-car.png"))
-        Dialog.setWindowTitle("E-TRAC Start-up page")
+        Dialog.setWindowTitle("E-TRAC Start-up")
         self.img_holder = QtWidgets.QLabel(Dialog)
         self.img_holder.setGeometry(QtCore.QRect(0, 0, 800, 500))
         self.img_holder.setText("")
@@ -65,8 +65,8 @@ class Ui_Dialog(object):
 
 
     def click(self):
-        MainWindow.show()
         Dialog.close()
+        MainWindow.show()
 #         try:
 # #turn on and off the led in intervals of 1 second
 #             while(True):
@@ -158,6 +158,18 @@ class Ui_MainWindow(object):
         self.statusbar.setObjectName("statusbar")
         MainWindow.setStatusBar(self.statusbar)
         MainWindow.setWindowIcon(QtGui.QIcon("electric-car.png"))
+        self.forward = QtWidgets.QPushButton(self.centralwidget)
+        self.forward.setGeometry(QtCore.QRect(620, 300, 93, 28))
+        self.forward.setObjectName("forward")
+        self.left = QtWidgets.QPushButton(self.centralwidget)
+        self.left.setGeometry(QtCore.QRect(570, 330, 93, 28))
+        self.left.setObjectName("left")
+        self.right = QtWidgets.QPushButton(self.centralwidget)
+        self.right.setGeometry(QtCore.QRect(670, 330, 93, 28))
+        self.right.setObjectName("right")
+        self.reverse = QtWidgets.QPushButton(self.centralwidget)
+        self.reverse.setGeometry(QtCore.QRect(620, 360, 93, 28))
+        self.reverse.setObjectName("reverse")
 
         self.retranslateUi(MainWindow)
         QtCore.QMetaObject.connectSlotsByName(MainWindow)
@@ -178,7 +190,10 @@ class Ui_MainWindow(object):
         self.label_4.setText(_translate("MainWindow", "KM"))
         self.label_5.setText(_translate("MainWindow", "KM/H"))
         self.label_6.setText(_translate("MainWindow", "%"))
-
+        self.forward.setText(_translate("MainWindow", "FORWARD"))
+        self.left.setText(_translate("MainWindow", "LEFT"))
+        self.right.setText(_translate("MainWindow", "RIGHT"))
+        self.reverse.setText(_translate("MainWindow", "REVERSE"))
 
     def clicked(self):
         if self.killswitch.isChecked():
@@ -202,20 +217,16 @@ class Ui_MainWindow(object):
 
 if __name__ == "__main__":
     import sys
-
-    # GPIO.setmode(GPIO.BOARD)
-    # mypin = 8
-    # GPIO.setup(mypin, GPIO.OUT, initial = 0)
-
     app = QtWidgets.QApplication(sys.argv)
+    Dialog = QtWidgets.QDialog()
+    u_i = Ui_Dialog()
+    u_i.setupUi(Dialog)
+    Dialog.show()
+    u_i.boot()
     MainWindow = QtWidgets.QMainWindow()
     ui = Ui_MainWindow()
     ui.setupUi(MainWindow)
-    Dialog = QtWidgets.QDialog()
-    ui = Ui_Dialog()
-    ui.setupUi(Dialog)
-    Dialog.show()
-    ui.boot()
-    #app = QtWidgets.QApplication(sys.argv)
+
 
     sys.exit(app.exec_())
+    #app = QtWidgets.QApplication(sys.argv)
