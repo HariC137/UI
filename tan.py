@@ -11,8 +11,9 @@ from PyQt5 import QtCore, QtGui, QtWidgets
 from PyQt5.QtWidgets import QMessageBox
 #import RPi.GPIO as GPIO
 import time
-from firebase import Firebase
-
+from firebase import firebase
+firebase = firebase.FirebaseApplication('https://e-trac-5d530.firebaseio.com/', None)
+result = firebase.get('/users', None)
 class Ui_Dialog(object):
     def setupUi(self, Dialog):
         Dialog.setObjectName("Dialog")
@@ -243,7 +244,7 @@ if __name__ == "__main__":
     MainWindow = QtWidgets.QMainWindow()
     ui = Ui_MainWindow()
     ui.setupUi(MainWindow)
-
+    result = firebase.get('/users', None)
 
     sys.exit(app.exec_())
     #app = QtWidgets.QApplication(sys.argv)
