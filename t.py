@@ -87,6 +87,11 @@ class Ui_MainWindow(object):
         self.reverse = QtWidgets.QPushButton(self.centralwidget)
         self.reverse.setGeometry(QtCore.QRect(620, 360, 93, 28))
         self.reverse.setObjectName("reverse")
+        self.comboBox = QtWidgets.QComboBox(self.centralwidget)
+        self.comboBox.setGeometry(QtCore.QRect(30, 190, 191, 22))
+        self.comboBox.setObjectName("comboBox")
+        self.comboBox.addItem("")
+        self.comboBox.addItem("")
         MainWindow.setCentralWidget(self.centralwidget)
         self.menubar = QtWidgets.QMenuBar(MainWindow)
         self.menubar.setGeometry(QtCore.QRect(0, 0, 800, 26))
@@ -97,6 +102,7 @@ class Ui_MainWindow(object):
         MainWindow.setStatusBar(self.statusbar)
 
         self.retranslateUi(MainWindow)
+        self.forward.pressed.connect(self.forward.showMenu)
         QtCore.QMetaObject.connectSlotsByName(MainWindow)
 
     def retranslateUi(self, MainWindow):
@@ -118,6 +124,8 @@ class Ui_MainWindow(object):
         self.left.setText(_translate("MainWindow", "LEFT"))
         self.right.setText(_translate("MainWindow", "RIGHT"))
         self.reverse.setText(_translate("MainWindow", "REVERSE"))
+        self.comboBox.setItemText(0, _translate("MainWindow", "Manual"))
+        self.comboBox.setItemText(1, _translate("MainWindow", "Remote"))
 
 
 if __name__ == "__main__":

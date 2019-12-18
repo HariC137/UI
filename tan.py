@@ -11,6 +11,7 @@ from PyQt5 import QtCore, QtGui, QtWidgets
 from PyQt5.QtWidgets import QMessageBox
 #import RPi.GPIO as GPIO
 import time
+from firebase import Firebase
 
 class Ui_Dialog(object):
     def setupUi(self, Dialog):
@@ -170,10 +171,23 @@ class Ui_MainWindow(object):
         self.reverse = QtWidgets.QPushButton(self.centralwidget)
         self.reverse.setGeometry(QtCore.QRect(620, 360, 93, 28))
         self.reverse.setObjectName("reverse")
+        self.comboBox = QtWidgets.QComboBox(self.centralwidget)
+        self.comboBox.setGeometry(QtCore.QRect(30, 190, 191, 22))
+        self.comboBox.setObjectName("comboBox")
+        self.comboBox.addItem("")
+        self.comboBox.addItem("")
 
         self.retranslateUi(MainWindow)
         QtCore.QMetaObject.connectSlotsByName(MainWindow)
-        self.start.clicked.connect(self.clicked)
+        self.start.pressed.connect(self.clicked)
+        self.forward.pressed.connect(self.con)
+
+    def con (self):
+        print("hi")
+        time.sleep(1)
+
+
+
 
     def retranslateUi(self, MainWindow):
         _translate = QtCore.QCoreApplication.translate
@@ -194,6 +208,9 @@ class Ui_MainWindow(object):
         self.left.setText(_translate("MainWindow", "LEFT"))
         self.right.setText(_translate("MainWindow", "RIGHT"))
         self.reverse.setText(_translate("MainWindow", "REVERSE"))
+        self.comboBox.setItemText(0, _translate("MainWindow", "Manual"))
+        self.comboBox.setItemText(1, _translate("MainWindow", "Remote"))
+
 
     def clicked(self):
         if self.killswitch.isChecked():
@@ -203,6 +220,7 @@ class Ui_MainWindow(object):
             msg_1.setWindowIcon(QtGui.QIcon("electric-car.png"))
             msg_1.setWindowTitle("ALERT!!")
             msg_1.setText("The engine has started")
+            print(self.comboBox.currentText())
 
             x = msg_1.exec_()
         else:
@@ -213,7 +231,6 @@ class Ui_MainWindow(object):
             msg_2.setText("The killswitch might be off!")
 
             x = msg_2.exec_()
-
 
 if __name__ == "__main__":
     import sys
