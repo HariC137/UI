@@ -207,7 +207,11 @@ class Ui_MainWindow(object):
           data = ser.readline(3)
           d = int(data)
           print(d)
+          d = d / 10
+          print (d)
           d = d * 2.7
+          print(d)
+          d = int(d)
           self.speed.display(d)
           time.sleep(1)
           ser.close()
