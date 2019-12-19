@@ -13,7 +13,9 @@ from PyQt5.QtWidgets import QMessageBox
 #import RPi.GPIO as GPIO
 import time
 import serial
-from firebase import firebase
+#from firebase import firebase
+import random
+
 class Ui_Dialog(object):
     def setupUi(self, Dialog):
         Dialog.setObjectName("Dialog")
@@ -169,7 +171,7 @@ class Ui_MainWindow(object):
         self.forward.pressed.connect(self.on_press)
         self.forward.released.connect(self.on_release)
         self.timer.timeout.connect(self.every_second_while_pressed)
-        self.start.pressed.connect(self.loop)
+        self.start.released.connect(self.loop)
 
     def retranslateUi(self, MainWindow):
         _translate = QtCore.QCoreApplication.translate
@@ -197,12 +199,14 @@ class Ui_MainWindow(object):
         self.timer.stop()
 
     def on_press(self):
-        self.timer.start(100)
+        self.timer.start(10)
+        self.loop()
 
     def every_second_while_pressed(self):
         print('click')
+
     def loop(self):
-        while True:
+        # while True:
           ser = serial.Serial ("/dev/ttyS0",9600)
           data = ser.readline(3)
           d = int(data)
@@ -215,6 +219,8 @@ class Ui_MainWindow(object):
           self.speed.display(d)
           time.sleep(1)
           ser.close()
+          #self.speed.display(random.randint(0,100))
+
 
     def clicked(self):
         if self.killswitch.isChecked():
@@ -240,7 +246,7 @@ class Ui_MainWindow(object):
 if __name__ == "__main__":
     import sys
 
-    firebase = firebase.FirebaseApplication('https://e-trac-5d530.firebaseio.com/', None)
+    #firebase = firebase.FirebaseApplication('https://e-trac-5d530.firebaseio.com/', None)
     app = QtWidgets.QApplication(sys.argv)
     Dialog = QtWidgets.QDialog()
     u_i = Ui_Dialog()
