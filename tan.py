@@ -199,7 +199,7 @@ class Ui_MainWindow(object):
         self.timer.stop()
 
     def on_press(self):
-        self.timer.start(10)
+        self.timer.start(1)
 
 
     def every_second_while_pressed(self):
@@ -210,11 +210,8 @@ class Ui_MainWindow(object):
           ser = serial.Serial ("/dev/ttyS0",9600)
           data = ser.readline(3)
           d = int(data)
-          print(d)
           d = d / 10
-          print (d)
           d = d * 2.7
-          print(d)
           d = int(d)
           self.speed.display(d)
           time.sleep(1)
