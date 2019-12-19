@@ -213,6 +213,7 @@ class Ui_MainWindow(object):
           d = d / 10
           d = d * 2.7
           d = int(d)
+          d = d / 10
           self.speed.display(d)
           time.sleep(1)
           ser.close()
