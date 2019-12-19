@@ -12,6 +12,7 @@ from PyQt5.QtCore import QTime, QTimer
 from PyQt5.QtWidgets import QMessageBox
 #import RPi.GPIO as GPIO
 import time
+import serial
 from firebase import firebase
 class Ui_Dialog(object):
     def setupUi(self, Dialog):
@@ -237,6 +238,16 @@ if __name__ == "__main__":
     MainWindow = QtWidgets.QMainWindow()
     ui = Ui_MainWindow()
     ui.setupUi(MainWindow)
+
+    while True:
+      ser = serial.Serial ("/dev/ttyS0",9600)
+      data = ser.readline(3)
+      d = int(data)
+      print(d)
+      d = d * 2.7
+      self.speed.display(d)
+      time.sleep(1)
+      ser.close()
 
     sys.exit(app.exec_())
     #app = QtWidgets.QApplication(sys.argv)
