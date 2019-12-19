@@ -169,7 +169,7 @@ class Ui_MainWindow(object):
         self.forward.pressed.connect(self.on_press)
         self.forward.released.connect(self.on_release)
         self.timer.timeout.connect(self.every_second_while_pressed)
-
+        self.start.pressed.connect(self.loop)
 
     def retranslateUi(self, MainWindow):
         _translate = QtCore.QCoreApplication.translate
@@ -201,7 +201,16 @@ class Ui_MainWindow(object):
 
     def every_second_while_pressed(self):
         print('click')
-
+    def loop(self):
+        while True:
+          ser = serial.Serial ("/dev/ttyS0",9600)
+          data = ser.readline(3)
+          d = int(data)
+          print(d)
+          d = d * 2.7
+          self.speed.display(d)
+          time.sleep(1)
+          ser.close()
 
     def clicked(self):
         if self.killswitch.isChecked():
@@ -238,16 +247,6 @@ if __name__ == "__main__":
     MainWindow = QtWidgets.QMainWindow()
     ui = Ui_MainWindow()
     ui.setupUi(MainWindow)
-
-    while True:
-      ser = serial.Serial ("/dev/ttyS0",9600)
-      data = ser.readline(3)
-      d = int(data)
-      print(d)
-      d = d * 2.7
-      self.speed.display(d)
-      time.sleep(1)
-      ser.close()
 
     sys.exit(app.exec_())
     #app = QtWidgets.QApplication(sys.argv)
