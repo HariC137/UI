@@ -8,12 +8,11 @@
 
 
 from PyQt5 import QtCore, QtGui, QtWidgets
+from PyQt5.QtCore import QTime, QTimer
 from PyQt5.QtWidgets import QMessageBox
 #import RPi.GPIO as GPIO
 import time
 from firebase import firebase
-firebase = firebase.FirebaseApplication('https://e-trac-5d530.firebaseio.com/', None)
-result = firebase.get('/users', None)
 class Ui_Dialog(object):
     def setupUi(self, Dialog):
         Dialog.setObjectName("Dialog")
@@ -69,27 +68,13 @@ class Ui_Dialog(object):
     def click(self):
         Dialog.close()
         MainWindow.show()
-#         try:
-# #turn on and off the led in intervals of 1 second
-#             while(True):
-#             #turn on, set as HIGH or 1
-#                 GPIO.output(8,GPIO.HIGH)
-#                 print("ON")
-#                 time.sleep(1)
-#                 #turn off, set as LOW or 0
-#                 GPIO.output(8, GPIO.LOW)
-#                 print("OFF")
-#                 time.sleep(1)
-#         except KeyboardInterrupt:
-#             #cleanup GPIO settings before exiting
-#             GPIO.cleanup()
-#             print("Exiting...")
 
 
 class Ui_MainWindow(object):
     def setupUi(self, MainWindow):
         MainWindow.setObjectName("MainWindow")
         MainWindow.resize(800, 500)
+        self.timer = QTimer()
         self.centralwidget = QtWidgets.QWidget(MainWindow)
         self.centralwidget.setObjectName("centralwidget")
         self.speed = QtWidgets.QLCDNumber(self.centralwidget)
@@ -180,14 +165,9 @@ class Ui_MainWindow(object):
 
         self.retranslateUi(MainWindow)
         QtCore.QMetaObject.connectSlotsByName(MainWindow)
-        self.start.pressed.connect(self.clicked)
-        self.forward.pressed.connect(self.con)
-
-    def con (self):
-        print("hi")
-        time.sleep(1)
-
-
+        self.forward.pressed.connect(self.on_press)
+        self.forward.released.connect(self.on_release)
+        self.timer.timeout.connect(self.every_second_while_pressed)
 
 
     def retranslateUi(self, MainWindow):
@@ -212,6 +192,15 @@ class Ui_MainWindow(object):
         self.comboBox.setItemText(0, _translate("MainWindow", "Manual"))
         self.comboBox.setItemText(1, _translate("MainWindow", "Remote"))
 
+    def on_release(self):
+        self.timer.stop()
+
+    def on_press(self):
+        self.timer.start(100)
+
+    def every_second_while_pressed(self):
+        print('click')
+
 
     def clicked(self):
         if self.killswitch.isChecked():
@@ -224,6 +213,7 @@ class Ui_MainWindow(object):
             print(self.comboBox.currentText())
 
             x = msg_1.exec_()
+
         else:
             msg_2 = QMessageBox()
             msg_2.setIcon(QMessageBox.Warning)
@@ -235,16 +225,18 @@ class Ui_MainWindow(object):
 
 if __name__ == "__main__":
     import sys
+
+    firebase = firebase.FirebaseApplication('https://e-trac-5d530.firebaseio.com/', None)
     app = QtWidgets.QApplication(sys.argv)
     Dialog = QtWidgets.QDialog()
     u_i = Ui_Dialog()
     u_i.setupUi(Dialog)
     Dialog.show()
     u_i.boot()
+
     MainWindow = QtWidgets.QMainWindow()
     ui = Ui_MainWindow()
     ui.setupUi(MainWindow)
-    result = firebase.get('/users', None)
 
     sys.exit(app.exec_())
     #app = QtWidgets.QApplication(sys.argv)
