@@ -200,10 +200,10 @@ class Ui_MainWindow(object):
 
     def on_press(self):
         self.timer.start(10)
-        self.loop()
+
 
     def every_second_while_pressed(self):
-        print('click')
+        self.loop()
 
     def loop(self):
         # while True:
