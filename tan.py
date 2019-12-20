@@ -105,7 +105,7 @@ class Ui_MainWindow(object):
         self.lightoff.setObjectName("lightoff")
         self.killswitch = QtWidgets.QCheckBox(self.centralwidget)
         self.killswitch.setGeometry(QtCore.QRect(680, 140, 101, 21))
-        self.killswitch.setObjectName("killswitch off")
+        self.killswitch.setObjectName("killswitch")
         self.start = QtWidgets.QPushButton(self.centralwidget)
         self.start.setGeometry(QtCore.QRect(20, 420, 93, 28))
         self.start.setObjectName("start")
@@ -246,7 +246,7 @@ class Ui_MainWindow(object):
             msg_2.setIcon(QMessageBox.Warning)
             msg_2.setWindowIcon(QtGui.QIcon("electric-car.png"))
             msg_2.setWindowTitle("ALERT!!")
-            msg_2.setText("The killswitch off is not checked")
+            msg_2.setText("The killswitch off is not check")
 
             x = msg_2.exec_()
 
