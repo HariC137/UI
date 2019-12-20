@@ -118,7 +118,7 @@ class Ui_MainWindow(object):
         self.totalrun = QtWidgets.QLCDNumber(self.centralwidget)
         self.totalrun.setGeometry(QtCore.QRect(10, 50, 221, 71))
         self.totalrun.setObjectName("totalrun")
-        self.totalrun.display(100)
+        self.batterylvl.display(100)
         self.Horn = QtWidgets.QPushButton(self.centralwidget)
         self.Horn.setGeometry(QtCore.QRect(310, 340, 141, 61))
         self.Horn.setObjectName("Horn")
