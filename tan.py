@@ -10,11 +10,11 @@
 from PyQt5 import QtCore, QtGui, QtWidgets
 from PyQt5.QtCore import QTime, QTimer
 from PyQt5.QtWidgets import QMessageBox
-import RPi.GPIO as GPIO
+#import RPi.GPIO as GPIO
 import time
 import serial
 #from firebase import firebase
-import random
+#import random
 
 class Ui_Dialog(object):
     def setupUi(self, Dialog):
@@ -148,18 +148,18 @@ class Ui_MainWindow(object):
         self.statusbar.setObjectName("statusbar")
         MainWindow.setStatusBar(self.statusbar)
         MainWindow.setWindowIcon(QtGui.QIcon("electric-car.png"))
-        self.forward = QtWidgets.QPushButton(self.centralwidget)
-        self.forward.setGeometry(QtCore.QRect(620, 300, 93, 28))
-        self.forward.setObjectName("forward")
-        self.left = QtWidgets.QPushButton(self.centralwidget)
-        self.left.setGeometry(QtCore.QRect(570, 330, 93, 28))
-        self.left.setObjectName("left")
-        self.right = QtWidgets.QPushButton(self.centralwidget)
-        self.right.setGeometry(QtCore.QRect(670, 330, 93, 28))
-        self.right.setObjectName("right")
-        self.reverse = QtWidgets.QPushButton(self.centralwidget)
-        self.reverse.setGeometry(QtCore.QRect(620, 360, 93, 28))
-        self.reverse.setObjectName("reverse")
+        # self.forward = QtWidgets.QPushButton(self.centralwidget)
+        # self.forward.setGeometry(QtCore.QRect(620, 300, 93, 28))
+        # self.forward.setObjectName("forward")
+        # self.left = QtWidgets.QPushButton(self.centralwidget)
+        # self.left.setGeometry(QtCore.QRect(570, 330, 93, 28))
+        # self.left.setObjectName("left")
+        # self.right = QtWidgets.QPushButton(self.centralwidget)
+        # self.right.setGeometry(QtCore.QRect(670, 330, 93, 28))
+        # self.right.setObjectName("right")
+        # self.reverse = QtWidgets.QPushButton(self.centralwidget)
+        # self.reverse.setGeometry(QtCore.QRect(620, 360, 93, 28))
+        # self.reverse.setObjectName("reverse")
         self.comboBox = QtWidgets.QComboBox(self.centralwidget)
         self.comboBox.setGeometry(QtCore.QRect(30, 190, 191, 22))
         self.comboBox.setObjectName("comboBox")
@@ -170,7 +170,9 @@ class Ui_MainWindow(object):
         QtCore.QMetaObject.connectSlotsByName(MainWindow)
         self.forward.pressed.connect(self.on_press)
         self.forward.released.connect(self.on_release)
-        #self.start.pressed.connect(self.clicked)
+        self.reverse.pressed.connect(self.on_press)
+        self.reverse.released.connect(self.on_release)
+        self.start.pressed.connect(self.clicked)
         self.timer.timeout.connect(self.every_second_while_pressed)
         #self.start.released.connect(self.loop)
 
@@ -231,10 +233,22 @@ class Ui_MainWindow(object):
             msg_1.setWindowIcon(QtGui.QIcon("electric-car.png"))
             msg_1.setWindowTitle("ALERT!!")
             msg_1.setText("The engine has started")
-            print(self.comboBox.currentText())
+            #print(self.comboBox.currentText())
+            self.forward = QtWidgets.QPushButton(self.centralwidget)
+            self.forward.setGeometry(QtCore.QRect(620, 300, 93, 28))
+            self.forward.setObjectName("forward")
+            self.left = QtWidgets.QPushButton(self.centralwidget)
+            self.left.setGeometry(QtCore.QRect(570, 330, 93, 28))
+            self.left.setObjectName("left")
+            self.right = QtWidgets.QPushButton(self.centralwidget)
+            self.right.setGeometry(QtCore.QRect(670, 330, 93, 28))
+            self.right.setObjectName("right")
+            self.reverse = QtWidgets.QPushButton(self.centralwidget)
+            self.reverse.setGeometry(QtCore.QRect(620, 360, 93, 28))
+            self.reverse.setObjectName("reverse")
 
             x = msg_1.exec_()
-            self.loop()
+
 
         else:
             msg_2 = QMessageBox()
@@ -265,5 +279,5 @@ if __name__ == "__main__":
     ui.setupUi(MainWindow)
 
     sys.exit(app.exec_())
-    GPIO.cleanup()
+    #GPIO.cleanup()
     #app = QtWidgets.QApplication(sys.argv)
