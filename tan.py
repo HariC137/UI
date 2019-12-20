@@ -172,7 +172,7 @@ class Ui_MainWindow(object):
         # self.forward.released.connect(self.on_release)
         self.start.pressed.connect(self.clicked)
         self.timer.timeout.connect(self.every_second_while_pressed)
-        self.start.released.connect(self.loop)
+        #self.start.released.connect(self.loop)
 
     def retranslateUi(self, MainWindow):
         _translate = QtCore.QCoreApplication.translate
@@ -209,7 +209,7 @@ class Ui_MainWindow(object):
 
     def loop(self):
         while GPIO.input(18) :
-          # ser = serial.Serial ("/dev/ttyS0",9600)
+          ser = serial.Serial ("/dev/ttyS0",9600)
           data = ser.readline(3)
           d = int(data)
           d = d / 10
@@ -217,7 +217,7 @@ class Ui_MainWindow(object):
           d = int(d)
           self.speed.display(d)
           time.sleep(1)
-          #ser.close()
+          ser.close()
           #self.speed.display(random.randint(0,100))
 
 
@@ -232,6 +232,7 @@ class Ui_MainWindow(object):
             print(self.comboBox.currentText())
 
             x = msg_1.exec_()
+            self.loop()
 
         else:
             msg_2 = QMessageBox()
@@ -245,8 +246,6 @@ class Ui_MainWindow(object):
 if __name__ == "__main__":
     import sys
 
-
-    ser = serial.Serial ("/dev/ttyS0",9600)
     #firebase = firebase.FirebaseApplication('https://e-trac-5d530.firebaseio.com/', None)
     app = QtWidgets.QApplication(sys.argv)
     GPIO.setmode(GPIO.BCM)
