@@ -250,8 +250,10 @@ if __name__ == "__main__":
 
     #firebase = firebase.FirebaseApplication('https://e-trac-5d530.firebaseio.com/', None)
     app = QtWidgets.QApplication(sys.argv)
+    GPIO.cleanup()
     GPIO.setmode(GPIO.BCM)
-    GPIO.setup(3, GPIO.IN)
+    GPIO.setwarnings(False)
+    GPIO.setup(3, GPIO.IN, pull_up_down=GPIO.PUD_DOWN)
     Dialog = QtWidgets.QDialog()
     u_i = Ui_Dialog()
     u_i.setupUi(Dialog)
@@ -263,4 +265,5 @@ if __name__ == "__main__":
     ui.setupUi(MainWindow)
 
     sys.exit(app.exec_())
+    GPIO.cleanup()
     #app = QtWidgets.QApplication(sys.argv)
