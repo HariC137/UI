@@ -208,7 +208,7 @@ class Ui_MainWindow(object):
         #self.loop()
 
     def loop(self):
-        data = GPIO.input(23)
+        data = GPIO.input(18)
         print(data)
         # while GPIO.input(18) :
         #   ser = serial.Serial ("/dev/ttyS0",9600)
@@ -251,7 +251,7 @@ if __name__ == "__main__":
     #firebase = firebase.FirebaseApplication('https://e-trac-5d530.firebaseio.com/', None)
     app = QtWidgets.QApplication(sys.argv)
     GPIO.setmode(GPIO.BCM)
-    GPIO.setup(23, GPIO.IN)
+    GPIO.setup(18, GPIO.IN)
     Dialog = QtWidgets.QDialog()
     u_i = Ui_Dialog()
     u_i.setupUi(Dialog)
