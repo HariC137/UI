@@ -168,10 +168,10 @@ class Ui_MainWindow(object):
 
         self.retranslateUi(MainWindow)
         QtCore.QMetaObject.connectSlotsByName(MainWindow)
-        # self.forward.pressed.connect(self.on_press)
-        # self.forward.released.connect(self.on_release)
-        self.forward.pressed.connect(self.clicked)
-        #self.timer.timeout.connect(self.every_second_while_pressed)
+        self.forward.pressed.connect(self.on_press)
+        self.forward.released.connect(self.on_release)
+        #self.start.pressed.connect(self.clicked)
+        self.timer.timeout.connect(self.every_second_while_pressed)
         #self.start.released.connect(self.loop)
 
     def retranslateUi(self, MainWindow):
