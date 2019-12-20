@@ -203,19 +203,20 @@ class Ui_MainWindow(object):
 
 
     def every_second_while_pressed(self):
-        self.loop()
+        #print("click")
+        #self.loop()
 
     def loop(self):
-        # while True:
+        while GPIO.input(18) :
           ser = serial.Serial ("/dev/ttyS0",9600)
           data = ser.readline(3)
           d = int(data)
           d = d / 10
-          d = d / 3
+          d = d / 3.2
           d = int(d)
           self.speed.display(d)
           time.sleep(1)
-          ser.close()
+          #ser.close()
           #self.speed.display(random.randint(0,100))
 
 
@@ -243,8 +244,12 @@ class Ui_MainWindow(object):
 if __name__ == "__main__":
     import sys
 
+
+    ser = serial.Serial ("/dev/ttyS0",9600)
     #firebase = firebase.FirebaseApplication('https://e-trac-5d530.firebaseio.com/', None)
     app = QtWidgets.QApplication(sys.argv)
+    GPIO.setmode(GPIO.BCM)
+    GPIO.setup(18, GPIO.OUT)
     Dialog = QtWidgets.QDialog()
     u_i = Ui_Dialog()
     u_i.setupUi(Dialog)
