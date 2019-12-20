@@ -199,7 +199,7 @@ class Ui_MainWindow(object):
         self.timer.stop()
 
     def on_press(self):
-        self.timer.start(1)
+        self.timer.start(100)
 
 
     def every_second_while_pressed(self):
@@ -211,9 +211,8 @@ class Ui_MainWindow(object):
           data = ser.readline(3)
           d = int(data)
           d = d / 10
-          d = d * 2.7
+          d = d / 3
           d = int(d)
-          d = d / 10
           self.speed.display(d)
           time.sleep(1)
           ser.close()
