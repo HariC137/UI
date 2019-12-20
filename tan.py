@@ -183,7 +183,7 @@ class Ui_MainWindow(object):
         self.label_2.setText(_translate("MainWindow", "BATTERY LVL :"))
         self.lighton.setText(_translate("MainWindow", "Light ON"))
         self.lightoff.setText(_translate("MainWindow", "Light Off"))
-        self.killswitch.setText(_translate("MainWindow", "Kill Switch"))
+        self.killswitch.setText(_translate("MainWindow", "Kill Switch off"))
         self.start.setText(_translate("MainWindow", "START"))
         self.stop.setText(_translate("MainWindow", "STOP"))
         self.label_3.setText(_translate("MainWindow", "TOTAL DISTANCE COVERED :"))
@@ -246,7 +246,7 @@ class Ui_MainWindow(object):
             msg_2.setIcon(QMessageBox.Warning)
             msg_2.setWindowIcon(QtGui.QIcon("electric-car.png"))
             msg_2.setWindowTitle("ALERT!!")
-            msg_2.setText("The killswitch might be off!")
+            msg_2.setText("The killswitch off is not checked")
 
             x = msg_2.exec_()
 
