@@ -168,8 +168,9 @@ class Ui_MainWindow(object):
 
         self.retranslateUi(MainWindow)
         QtCore.QMetaObject.connectSlotsByName(MainWindow)
-        self.forward.pressed.connect(self.on_press)
-        self.forward.released.connect(self.on_release)
+        # self.forward.pressed.connect(self.on_press)
+        # self.forward.released.connect(self.on_release)
+        self.start.pressed.connect(self.slick)
         self.timer.timeout.connect(self.every_second_while_pressed)
         self.start.released.connect(self.loop)
 
@@ -203,12 +204,12 @@ class Ui_MainWindow(object):
 
 
     def every_second_while_pressed(self):
-        #print("click")
+        print('click')
         #self.loop()
 
-     def loop(self):
+    def loop(self):
         while GPIO.input(18) :
-          ser = serial.Serial ("/dev/ttyS0",9600)
+          # ser = serial.Serial ("/dev/ttyS0",9600)
           data = ser.readline(3)
           d = int(data)
           d = d / 10
