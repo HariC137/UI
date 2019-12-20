@@ -10,7 +10,7 @@
 from PyQt5 import QtCore, QtGui, QtWidgets
 from PyQt5.QtCore import QTime, QTimer
 from PyQt5.QtWidgets import QMessageBox
-#import RPi.GPIO as GPIO
+import RPi.GPIO as GPIO
 import time
 import serial
 #from firebase import firebase
@@ -250,7 +250,7 @@ if __name__ == "__main__":
     #firebase = firebase.FirebaseApplication('https://e-trac-5d530.firebaseio.com/', None)
     app = QtWidgets.QApplication(sys.argv)
     GPIO.setmode(GPIO.BCM)
-    GPIO.setup(18, GPIO.OUT)
+    GPIO.setup(18, GPIO.IN)
     Dialog = QtWidgets.QDialog()
     u_i = Ui_Dialog()
     u_i.setupUi(Dialog)
