@@ -105,7 +105,7 @@ class Ui_MainWindow(object):
         self.lightoff.setObjectName("lightoff")
         self.killswitch = QtWidgets.QCheckBox(self.centralwidget)
         self.killswitch.setGeometry(QtCore.QRect(680, 140, 101, 21))
-        self.killswitch.setObjectName("killswitch")
+        self.killswitch.setObjectName("killswitch off")
         self.start = QtWidgets.QPushButton(self.centralwidget)
         self.start.setGeometry(QtCore.QRect(20, 420, 93, 28))
         self.start.setObjectName("start")
