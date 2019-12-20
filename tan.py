@@ -206,7 +206,7 @@ class Ui_MainWindow(object):
         #print("click")
         #self.loop()
 
-    def loop(self):
+     def loop(self):
         while GPIO.input(18) :
           ser = serial.Serial ("/dev/ttyS0",9600)
           data = ser.readline(3)
